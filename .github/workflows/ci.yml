@@ -19,13 +19,13 @@ jobs:
         node-version: '18'
     
     - name: Install Backend Dependencies
-      working-directory: ./backend
+      working-directory: backend
       run: npm install
     
     - name: Install Frontend Dependencies
-      working-directory: ./frontend
+      working-directory: frontend
       run: npm install
     
     - name: Type Check Frontend
-      working-directory: ./frontend
+      working-directory: frontend
       run: npx tsc --noEmit
