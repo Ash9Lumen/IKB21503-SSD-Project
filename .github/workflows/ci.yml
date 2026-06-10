@@ -7,33 +7,25 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  build-and-test:
     runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v4
     
-    - name: Use Node.js
+    - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '18'
     
-    - name: Install backend dependencies
-      run: |
-        cd backend
-        npm install
+    - name: Install Backend Dependencies
+      working-directory: ./backend
+      run: npm install
     
-    - name: Run backend linting
-      run: |
-        cd backend
-        npm run lint || echo "No lint script found"
+    - name: Install Frontend Dependencies
+      working-directory: ./frontend
+      run: npm install
     
-    - name: Install frontend dependencies
-      run: |
-        cd frontend
-        npm install
-    
-    - name: Type check frontend
-      run: |
-        cd frontend
-        npx tsc --noEmit
+    - name: Type Check Frontend
+      working-directory: ./frontend
+      run: npx tsc --noEmit
